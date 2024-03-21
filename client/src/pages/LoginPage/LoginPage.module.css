@@ -1,0 +1,118 @@
+
+.main_container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+.heading{
+  display: flex;
+  margin-top: 12px;
+  margin-bottom: 15px;
+  align-content: center;
+}
+
+.heading img {
+  height: 53px;
+  width: 53px;
+}
+
+
+.heading > p{
+margin-top: 5px;
+  width: 176px;
+  height: 52px;
+  color: #2E0052;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.form_box{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #D9D9D9;
+  border-radius: 24px;
+  padding: 24px;
+  height: 50%;
+  width: 25%;
+
+}
+
+.email_box{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+
+}
+.form_input{
+  border: 1px solid #B6B6B6;
+  border-radius: 6px;
+  height: 2rem;
+  outline: none;
+  padding: 0px 8px;
+}
+.form_button{
+  background-color: #2E0052;
+  height: 2rem;
+  outline: none;
+  border: none;
+  color: #FFFFFF;
+  padding: 0px 8px;
+  border-radius: 6px;
+  margin-top: 22px;
+  margin-bottom: 32px;
+  cursor: pointer;
+
+}
+.button_box{
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 25%;
+}
+.button_box p{
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+
+
+.button_box p::before,
+.button_box p::after {
+  content: '';
+  flex: 1; 
+  border-bottom: 1px solid #BDBDBD;
+  margin: 0 10px; 
+}
+
+.button_input{
+  border: 1px solid #B6B6B6;
+  border-radius: 6px;
+  height: 2rem;
+  outline: none;
+  padding: 0px 12px;
+  width: 100%;
+  font-weight: 400;
+  cursor: pointer;
+  background-color: #FFFFFF;
+
+}
+.footer{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom:0;
+  background-color: #2E0052;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 20px;
+  height: 5vh;
+  width: 100vw;
+padding-top: 7px;
+  
+}
