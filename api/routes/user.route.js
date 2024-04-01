@@ -1,14 +1,16 @@
 import express from "express"
-import { create, signIn } from "../controllers/user.controller.js"
 import {
-  userValidator,
-  validate,
-  signInValidator
-} from "../middlewares/validator.js"
+  createInvoice,
+  createFeedback,
+  getInvoiceList,
+  getOneInvoiceList
+} from "../controllers/user.controller.js"
+import { verifyToken } from "../utils/verifyUser.js"
 const router = express.Router()
 
-router.post("/create", userValidator, validate, create)
-
-router.post("/sign-in", signInValidator, validate, signIn)
+router.post("/invoice", verifyToken, createInvoice)
+router.post("/feedback", verifyToken, createFeedback)
+router.get("/getInvoice/:id", getInvoiceList)
+router.get("/getOneInvoice/:id", getOneInvoiceList)
 
 export default router

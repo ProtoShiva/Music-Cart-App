@@ -1,37 +1,54 @@
-import User from "../models/user.model.js"
-import jwt from "jsonwebtoken"
-import "dotenv/config"
-import { sendError } from "../utils/helper.js"
-export const create = async (req, res) => {
-  const { userName, email, password, mobileNo } = req.body
+import FeedBack from "../models/feedback.model.js"
+import Invoice from "../models/invoice.model.js"
 
-  const oldUser = await User.findOne({ email })
-  if (oldUser) {
-    return res.status(401).json({ error: "this email is already in use!!" })
+export const createInvoice = async (req, res, next) => {
+  let userId = req.user.id
+  const { address, paymentType, itemsInfo, totalAmount } = req.body
+  try {
+    const userDoc = await Invoice.create({
+      owner: userId,
+      address,
+      paymentType,
+      itemsInfo,
+      totalAmount
+    })
+    res.json(userDoc)
+  } catch (error) {
+    res.status(422).json(error)
+    next(error)
   }
-
-  const newUser = new User({ userName, email, password, mobileNo })
-  await newUser.save()
-
-  res.status(201).json({
-    message: newUser
-  })
 }
 
-export const signIn = async (req, res) => {
-  const { email, password } = req.body
+export const createFeedback = async (req, res, next) => {
+  let userId = req.user.id
+  const { feedbackType, feedback } = req.body
+  try {
+    const userDoc = await FeedBack.create({
+      owner: userId,
+      feedbackType,
+      feedback
+    })
+    res.json(userDoc)
+  } catch (error) {
+    res.status(422).json(error)
+    next(error)
+  }
+}
 
-  const user = await User.findOne({ email })
-  if (!user) return sendError(res, "Email/Password mismatch!")
+export const getInvoiceList = async (req, res, next) => {
+  const { id } = req.params
+  try {
+    res.json(await Invoice.find({ owner: id }))
+  } catch (error) {
+    next(error)
+  }
+}
 
-  const matched = await user.comparePassword(password)
-  if (!matched) return sendError(res, "Email/Password mismatch!")
-
-  const { _id, name } = user
-
-  const jwtToken = jwt.sign({ userId: _id }, process.env.jwtSecret)
-
-  res.json({
-    user: { id: _id, name, email, token: jwtToken }
-  })
+export const getOneInvoiceList = async (req, res, next) => {
+  const { id } = req.params
+  try {
+    res.json(await Invoice.findById(id))
+  } catch (error) {
+    next(error)
+  }
 }
