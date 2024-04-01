@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import RegisterPage from "./pages/RegisterPage/RegisterPage"
@@ -10,6 +11,9 @@ import CheckOutPage from "./pages/CheckOutPage/CheckOutPage.jsx"
 import SuccessPage from "./pages/SuccessPage/SuccessPage.jsx"
 import InvoicePage from "./pages/InvoicePage/InvoicePage.jsx"
 import FinalinvoicePage from "./pages/FinalInvoicePage/FinalinvoicePage.jsx"
+import PrivateRoute from "./components/PrivateRoute.jsx"
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+axios.defaults.withCredentials = true
 const App = () => {
   return (
     <>
@@ -20,11 +24,13 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/ProductPage/:id" element={<ProductPage />} />
-            <Route path="/mycart" element={<MyCartPage />} />
-            <Route path="/checkout" element={<CheckOutPage />} />
-            <Route path="/success" element={<SuccessPage />} />
-            <Route path="/invoices" element={<InvoicePage />} />
-            <Route path="/finalInvoice/:id" element={<FinalinvoicePage />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/mycart" element={<MyCartPage />} />
+              <Route path="/checkout" element={<CheckOutPage />} />
+              <Route path="/success" element={<SuccessPage />} />
+              <Route path="/invoices" element={<InvoicePage />} />
+              <Route path="/finalInvoice/:id" element={<FinalinvoicePage />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </UserContextProvider>
