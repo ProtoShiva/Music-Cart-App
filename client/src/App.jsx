@@ -1,5 +1,4 @@
 import React from "react"
-import axios from "axios"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import RegisterPage from "./pages/RegisterPage/RegisterPage"
@@ -12,8 +11,7 @@ import SuccessPage from "./pages/SuccessPage/SuccessPage.jsx"
 import InvoicePage from "./pages/InvoicePage/InvoicePage.jsx"
 import FinalinvoicePage from "./pages/FinalInvoicePage/FinalinvoicePage.jsx"
 import PrivateRoute from "./components/PrivateRoute.jsx"
-axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
-axios.defaults.withCredentials = true
+
 const App = () => {
   return (
     <>
